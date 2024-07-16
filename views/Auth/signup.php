@@ -1,10 +1,9 @@
-
 <title>Register Form</title>
 <body>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form action="db.php" method="post" enctype="multipart/form-data" class="form-center border border-primary p-4">
+                <form action="./ajax/Auth/register.php" method="post" enctype="multipart/form-data" class="form-center border border-primary p-4">
                 <h2 class="text-center mb-4">Register Form</h2>
                 <div class="form-group row mb-3">
                     <label for="" class="col-sm-3 col-form-label">Name:</label>
