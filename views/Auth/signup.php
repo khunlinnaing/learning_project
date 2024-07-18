@@ -32,7 +32,7 @@
                     <div class="form-group row mb-3">
                         <label for="" class="col-sm-3 col-form-label">Profile Image:</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" name="profile_image" accept="image/*">
+                            <input type="file" class="form-control" name="image" accept="image/*">
                         </div>
                     </div>
                     <div class="form-group row mb-3">

@@ -1,75 +1,62 @@
-<!-- <?php
+<?php
 require_once '../../dbconnection/database.php';
 require_once '../../classes/UserClasses.php';
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);
-// $result = $user->UserRegister($_POST);
-$upload_dir = 'uploads/';
-        
-// Ensure the upload directory exists
-if (!is_dir($upload_dir)) {
-    mkdir($upload_dir, 0777, true);
-    echo 'true';
-}else{
-    echo 'error';
-}
-
-
-// move_uploaded_file($_FILES['profile']['name'], $file_path);
-// var_dump($_FILES['profile']['name']);
-// echo '<br>'.'hello world'.'<br>';
-// var_dump($result);
-    // require '../dbconnection/database.php';
-    // // require '../../classes/UserClasses.php';
-    
-    // // $database = new Database();
-    // // $db = $database->getConnection();
-    
-    // // $user = new User($db);
-    
-?> -->
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Check if file was uploaded without errors
-    if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
-        // Get details of the uploaded file
-        $file_tmp_name = $_FILES['profile_image']['tmp_name'];
-        $file_name = basename($_FILES['profile_image']['name']);
-        $file_size = $_FILES['profile_image']['size'];
-        $file_type = $_FILES['profile_image']['type'];
-
-        // Set the upload directory
-        $upload_dir = '../../uploads/';
-
-        // Ensure the upload directory exists
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, true);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $target_dir = "../../uploads/";
+    $result=$user->UserRegister($_POST);
+    var_dump($result);
+    die();
+    if($result){
+        // Create the target directory if it doesn't exist
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0777, true);
         }
 
-        // Allowed file types
-        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+        // Get the uploaded file information
+        $target_file = $target_dir . basename($_FILES["image"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        // Check the file type
-        if (in_array($file_type, $allowed_types)) {
-            // Set the target file path
-            $file_path = $upload_dir . $file_name;
-
-            // Move the uploaded file to the target directory
-            if (move_uploaded_file($file_tmp_name, $file_path)) {
-                echo "The file " . htmlspecialchars($file_name) . " has been uploaded successfully.";
-            } else {
-                echo "There was an error moving the uploaded file.";
-            }
+        // Check if the file is an actual image or a fake image
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        if ($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
         } else {
-            echo "Invalid file type. Please upload a JPEG, PNG, or GIF image.";
+            echo "File is not an image.";
+            $uploadOk = 0;
         }
-    } else {
-        echo "No file uploaded or there was an upload error.";
-    }
-} else {
-    echo "Invalid request method.";
-}
-?>
 
+        // Check if the file already exists
+        if (file_exists($target_file)) {
+            echo "Sorry, file already exists.";
+            $uploadOk = 0;
+        }
+
+        // Check the file size (limit to 5MB)
+        if ($_FILES["image"]["size"] > 5000000) {
+            echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        } else {
+            $moveFile = move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+            echo 'Create is success';
+        }
+    }else{
+        echo 'Something Worng';
+    }
+} 
+?>

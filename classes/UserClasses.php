@@ -21,11 +21,9 @@ class User {
     // }
 
     public function UserRegister($request){
-        $query = 'INSERT INTO '.$this->table_name.'(name,email,phone, birthday, address, password, profile) VALUES("'.$request['name'].'", "'.$request['email'].'","'.$request['phone'].'", "'.$request['birthday'].'","'.$request['address'].'", "'.$request['password'].'","'.$request['profile'].'")';
-        return $query;
-        die();
-        // $result = $this->conn->exec($query);
-        // return $result;
+        $query = 'INSERT INTO '.$this->table_name.'(name,email,phone, birthday, address, password, profile) VALUES("'.$request['name'].'", "'.$request['email'].'","'.$request['phone'].'", "'.$request['birthday'].'","'.$request['address'].'", "'.password_hash($request['password'], PASSWORD_DEFAULT).'","'.$_FILES["image"]["name"].'")';
+        $result = $this->conn->exec($query);
+        return $result;
     }
 
     // public function update($request) {
