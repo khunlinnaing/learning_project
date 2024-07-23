@@ -1,14 +1,14 @@
-<?php
-require('../../ajax/product/productCreate.php');
-?>
 
+<?php
+ require('../../ajax/product/detail.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Pizza </title>
+    <title>Update Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
@@ -20,11 +20,11 @@ require('../../ajax/product/productCreate.php');
 <div class=" col-6 offset-3 mt-5">
     <div class="card  p-4">
         <div class="card-title text-center">
-               <h4>Create Pizza Page</h4> 
+               <h4>Update Pizza Page</h4> 
         </div>
         <div class="card-body">
-            <form action="" method="post">
-            
+            <form action="../../ajax/product/update.php" method="post">
+          <?php echo'<input type="text" hidden name="id" value="'.$row["id"].'"> '; ?>
                      
                        <div class="col-6 offset-6 ">
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -37,8 +37,8 @@ require('../../ajax/product/productCreate.php');
                                     <label for=""> Pizza</label>
                                 </div>
                                 <div class="col-9">
-                                    <input type="text" name="pizzaName" id="" class="w-100 form-control " placeholder="Enter Pizza name">
-                                    <small class="text-danger"><?php echo $pizzaNameError; ?></small>
+                                <?php  echo'  <input type="text" name="pizzaName" id="" class="w-100 form-control " value='.$row["product_name"].' placeholder="Enter Pizza name">'; ?>
+                                    <small class="text-danger"></small>
 
                         </div>
                     </div>
@@ -53,13 +53,15 @@ require('../../ajax/product/productCreate.php');
                             <div class="col-9">
                                 <select name="categoryName" id="" class="w-100 form-control">
                                     <option value="">Choose category name</option>
-                                    <option value="neapolitan">Neapolitan Pizza</option>
-                                    <option value="newYork">New York Style Pizza</option>
-                                    <option value="fritta">Pizza Fritta</option>
-                                    <option value="hawaiian">Hawaiian pizza</option>
-                                    <option value="sicilian">Sicilian pizza</option>
+                                
+                                <option value="neapolitan"<?php if($row['category_name']=='neapolitan'){  ?> selected <?php } ?> >Neapolitan Pizza</option>
+                                <option value="newYork" <?php if($row['category_name']=='newYork'){  ?> selected <?php } ?>>New York Style Pizza</option>
+                                <option value="fritta" <?php if($row['category_name']=='fritta'){  ?> selected <?php } ?>>Pizza Fritta</option>
+                                <option value="hawaiian" <?php if($row['category_name']=='hawaiian'){  ?> selected <?php } ?>>Hawaiian pizza</option>
+                                <option value="sicilian" <?php if($row['category_name']=='sicilian'){  ?> selected <?php } ?>>Sicilian pizza</option>
+                                
                                 </select> 
-                                <small class="text-danger"><?php echo $nameError; ?></small>
+                                <small class="text-danger"></small>
 
                             </div>
                         <!-- </div> -->
@@ -73,8 +75,8 @@ require('../../ajax/product/productCreate.php');
 
                             </div>
                             <div class="col-9">
-                                    <textarea name="description" class="w-100 form-control" id="" placeholder="Enter description"></textarea>
-                                   <small class="text-danger"><?php echo $descriptionError; ?></small> 
+                                    <textarea name="description" class="w-100 form-control" id="" placeholder="Enter description"><?php echo' '.$row["description"].''; ?></textarea>
+                                   <small class="text-danger"></small> 
 
                             </div>
                             
@@ -86,8 +88,8 @@ require('../../ajax/product/productCreate.php');
                                 <label for=""> Amount</label>
                             </div>
                             <div class="col-9">
-                                <input type="number" name="amount" id="" class="w-100 form-control " placeholder="Choose what you want amount ...">
-                                <small class="text-danger"><?php echo $amountError; ?></small>
+                               <?php echo' <input type="number" name="amount" id="" class="w-100 form-control " value='.$row["amount"].' placeholder="Choose what you want amount ...">'; ?>
+                                <small class="text-danger"></small>
 
                             </div>
                         </div>
@@ -98,13 +100,13 @@ require('../../ajax/product/productCreate.php');
                                 <label for=""> Price</label>
                             </div>
                             <div class="col-9">
-                                <input type="number" name="price" id="" class="w-100 form-control " placeholder="Enter price ...">
-                                <small class="text-danger"><?php echo $priceError; ?></small>
+                               <?php echo' <input type="number" name="price" value='.$row["price"].' id="" class="w-100 form-control" placeholder="Enter price ...">'; ?>
+                                <small class="text-danger"></small>
 
                             </div>
                         </div>
                         <div class="col-9 offset-3">
-                                <button type="submit" class="btn btn-outline-dark p-1 mt-3 w-100 " name="create"><i class="fa-solid fa-right-to-bracket me-2 "></i>Create</button>
+                                <button type="submit" class="btn btn-outline-dark p-1 mt-3 w-100 " name="create"><i class="fa-solid fa-right-to-bracket me-2 "></i>Update</button>
 
                         </div>
             </form>

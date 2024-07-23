@@ -1,6 +1,6 @@
 <?php
 
-        require('../Database/database.php');
+        require('../../dbconnection/database.php');
         $categoryName="";
         $pizzaName="";
         $description="";
@@ -29,6 +29,7 @@
 
             // use exec() because no results are returned
             $conn->exec($sql);
+            header("Location: ../../views/product/ProductList.php");
             //     $data=[
             //         'userData'=>$userData,
             //         'createdSuccess'=>'Inserted data successfully'

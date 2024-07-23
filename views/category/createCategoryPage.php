@@ -1,5 +1,5 @@
 <?php
-        require('createCategory.php');
+        require('../../ajax/category/createCategory.php');
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,6 @@
 <?php
 
-    require('../Database/database.php');
+    require('../../dbconnection/database.php');
     $categoryName="";
     $amount="";
     $nameError="";
@@ -17,6 +17,7 @@
 
             $sql="INSERT INTO categories(category_name,amount,user_id) VALUES('$categoryName','$amount','$userId')";
             $conn->exec($sql);
+          //  header("Location: ../.././views/product/ProductList.php");
            
         }
     }

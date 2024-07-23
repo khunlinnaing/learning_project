@@ -7,14 +7,12 @@
 <script src="./static/js/bootstrap.bundle.min.js" ></script>
 </head>
 <body>
-    <header>
-        <?php require_once './views/layout/header.php'?>
-    </header>
-    <main>
-        <?php 
-            require_once './views/index.php'
-        ?>
-    </main>
+    <!-- <header> -->
+        <?php require './views/layout/header.php';?>
+    <!-- </header>
+    <main> -->
+        <?php require './views/product/ProductList.php';?>
+    <!-- </main> -->
     <footer>
 
     </footer>
