@@ -1,10 +1,14 @@
 <title>Register Form</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 <body>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <form action="./ajax/Auth/register.php" method="post" enctype="multipart/form-data" class="form-center border border-primary p-4">
-                    <h2 class="text-center mb-4">Register Form</h2>
+                <h4><i class="bi bi-boxes me-1"></i>POS Delivery</h4> 
+    
+                <h2 class="text-center mb-4">Register Form</h2>
                     <div class="form-group row mb-3">
                         <label for="" class="col-sm-3 col-form-label">Name:</label>
                         <div class="col-sm-9">

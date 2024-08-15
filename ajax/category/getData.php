@@ -5,5 +5,6 @@
  $stmt=$conn->prepare($sql);
  $stmt->execute();
  $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
- var_dump($data);
+ return $data;
+//  echo "dbconnection success";
 ?>

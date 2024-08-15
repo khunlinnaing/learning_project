@@ -1,9 +1,11 @@
 <?php
-require('../../dbconnection/database.php');
-$sql="SELECT category_name FROM categories ";
-$stmt=$conn->prepare($sql);
-$stmt->execute();
-$data=$stmt->fetchAll(PDO::FETCH_ASSOC);
-var_dump($data);
+ require('../../dbconnection/database.php');
 
+ $sql="SELECT * FROM categories";
+ $stmt=$conn->prepare($sql);
+ $stmt->execute();
+ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+ return $data;
+ 
+//  echo "dbconnection success";
 ?>

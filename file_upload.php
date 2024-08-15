@@ -1,7 +1,8 @@
 <?php
-if (isset($_POST['submit'])) {
+require './dbconnection/database.php';
+if (isset($_POST['create'])) {
     // Define the target directory
-    $target_dir = "uploads/";
+    $target_dir = "static/image/";
 
     // Create the target directory if it doesn't exist
     if (!is_dir($target_dir)) {
@@ -16,7 +17,7 @@ if (isset($_POST['submit'])) {
     // Check if the file is an actual image or a fake image
     $check = getimagesize($_FILES["image"]["tmp_name"]);
     if ($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
+        echo $check["mime"] . ".";
         $uploadOk = 1;
     } else {
         echo "File is not an image.";
@@ -47,7 +48,13 @@ if (isset($_POST['submit'])) {
     // Try to upload the file
     } else {
         $moveFile = move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-        print_r($target_file);
+     
+        $image=uniqid().'_'.basename($_FILES["image"]["name"]);
+        $sql = "INSERT INTO products (product_name,description,price,image,category_id)
+            VALUES ('name','description',12,'$image',1)";
+
+        // // use exec() because no results are returned
+        $conn->exec($sql);
         // if () {
         //     echo "The file ". basename($_FILES["image"]["name"]). " has been uploaded.";
         // } else {
@@ -55,4 +62,5 @@ if (isset($_POST['submit'])) {
         // }
     }
 }
+
 ?>
